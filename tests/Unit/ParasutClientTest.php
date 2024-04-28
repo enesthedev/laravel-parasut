@@ -1,8 +1,7 @@
 <?php
 
-use Enes\Parasut\ParasutClient;
 use Enes\Parasut\Enums\AuthorizationType;
-use Enes\Parasut\Exceptions\InvalidAuthorizationTypeException;
+use Enes\Parasut\ParasutClient;
 
 test('it constructs with valid authorization type', function () {
     $client = new ParasutClient(AuthorizationType::AUTHORIZATION_CODE);

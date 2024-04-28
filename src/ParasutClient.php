@@ -3,7 +3,6 @@
 namespace Enes\Parasut;
 
 use Enes\Parasut\Enums\AuthorizationType;
-use Enes\Parasut\Exceptions\InvalidAuthorizationTypeException;
 
 class ParasutClient
 {

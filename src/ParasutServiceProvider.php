@@ -4,7 +4,6 @@ namespace Enes\Parasut;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Enes\Parasut\Commands\ParasutCommand;
 
 class ParasutServiceProvider extends PackageServiceProvider
 {

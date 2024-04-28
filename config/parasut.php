@@ -57,4 +57,3 @@ return [
     'password' => env('PARASUT_PASSWORD', ''),
 
 ];
-
