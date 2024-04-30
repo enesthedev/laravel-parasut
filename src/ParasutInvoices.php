@@ -51,4 +51,14 @@ class ParasutInvoices
             $data
         );
     }
+
+    public function pay(string $invoiceId, $data): Response
+    {
+        $this->client->authorize();
+
+        return $this->client->http->post(
+            "{$this->apiVersion}/{$this->companyId}/sales_invoices/$invoiceId/payments",
+            $data
+        );
+    }
 }
