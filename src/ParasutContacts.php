@@ -47,11 +47,11 @@ class ParasutContacts
      * @throws ParasutHTTPException
      * @throws InvalidArgumentException
      */
-    public function isTaxNumberRegistered(string $taxNumber): ?string
+    public function isTaxNumberRegistered(string $taxNumber): ?array
     {
         $response = $this->index(parameters: ['filter[tax_number]' => $taxNumber]);
 
-        if (! $response->ok()) {
+        if (!$response->ok()) {
             throw new ParasutHTTPException('Unable to retrieve contact details.');
         }
 
