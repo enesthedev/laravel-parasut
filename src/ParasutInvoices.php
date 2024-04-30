@@ -9,19 +9,17 @@ use Psr\SimpleCache\InvalidArgumentException;
 
 class ParasutInvoices
 {
-
     private ParasutClient $client;
+
     private string $companyId;
+
     private string $apiVersion;
 
-    /**
-     * @param ParasutClient $client
-     */
     public function __construct(ParasutClient $client)
     {
         $this->client = $client;
         $this->companyId = config('parasut.company_id');
-        $this->apiVersion = "v4";
+        $this->apiVersion = 'v4';
     }
 
     /**
@@ -40,8 +38,6 @@ class ParasutInvoices
     }
 
     /**
-     * @param $data
-     * @return Response
      * @throws AuthorizationException
      * @throws ConnectionException
      * @throws InvalidArgumentException

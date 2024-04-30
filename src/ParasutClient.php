@@ -11,6 +11,7 @@ use Psr\SimpleCache\InvalidArgumentException;
 class ParasutClient
 {
     public AuthorizationType $authorizationType;
+
     public ParasutHttpClient $http;
 
     const CACHE_KEY = 'parasut:authorization:credentials';
@@ -71,8 +72,8 @@ class ParasutClient
             ]
         );
 
-        if (!$response->ok()) {
-            throw new AuthorizationException("Authorization failed with status code: " . $response->status());
+        if (! $response->ok()) {
+            throw new AuthorizationException('Authorization failed with status code: '.$response->status());
         }
 
         return $response->body();
@@ -84,7 +85,7 @@ class ParasutClient
     private function validateClientId(): void
     {
         if (empty(config('parasut.client_id'))) {
-            throw new AuthorizationException("Missing client_id configuration. Please set the PARASUT_CLIENT_ID environment variable.");
+            throw new AuthorizationException('Missing client_id configuration. Please set the PARASUT_CLIENT_ID environment variable.');
         }
     }
 
@@ -94,7 +95,7 @@ class ParasutClient
     private function validateClientSecret(): void
     {
         if (empty(config('parasut.client_secret'))) {
-            throw new AuthorizationException("Missing client_secret configuration. Please set the PARASUT_CLIENT_SECRET environment variable.");
+            throw new AuthorizationException('Missing client_secret configuration. Please set the PARASUT_CLIENT_SECRET environment variable.');
         }
     }
 
@@ -104,7 +105,7 @@ class ParasutClient
     private function validateUsername(): void
     {
         if (empty(config('parasut.username'))) {
-            throw new AuthorizationException("Missing username configuration. Please set the PARASUT_USERNAME environment variable.");
+            throw new AuthorizationException('Missing username configuration. Please set the PARASUT_USERNAME environment variable.');
         }
     }
 
@@ -114,7 +115,7 @@ class ParasutClient
     private function validatePassword(): void
     {
         if (empty(config('parasut.password'))) {
-            throw new AuthorizationException("Missing password configuration. Please set the PARASUT_PASSWORD environment variable.");
+            throw new AuthorizationException('Missing password configuration. Please set the PARASUT_PASSWORD environment variable.');
         }
     }
 
