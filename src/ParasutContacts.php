@@ -51,7 +51,7 @@ class ParasutContacts
     {
         $response = $this->index(parameters: ['filter[tax_number]' => $taxNumber]);
 
-        if (! $response->ok()) {
+        if (!$response->ok()) {
             throw new ParasutHTTPException('Unable to retrieve contact details.');
         }
 
@@ -72,6 +72,6 @@ class ParasutContacts
         return $this->client->http->post(
             "{$this->apiVersion}/{$this->companyId}/contacts",
             $data,
-        )->json();
+        );
     }
 }
