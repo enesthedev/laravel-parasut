@@ -1,8 +1,7 @@
 {
     "name": "enesthedev/laravel-parasut",
-    "description": "Work in progress",
+    "description": "Parasut integration for Laravel",
     "keywords": [
-        "Enes",
         "laravel",
         "laravel-parasut"
     ],

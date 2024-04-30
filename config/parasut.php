@@ -56,4 +56,16 @@ return [
     */
     'password' => env('PARASUT_PASSWORD', ''),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Company ID
+    |--------------------------------------------------------------------------
+    |
+    | The unique identifier for the company associated with the service. This
+    | ID is utilized in endpoint declarations, such as '/{company_id}/invoices',
+    | to authenticate and access invoice-related resources.
+    |
+    */
+    'company_id' => env('PARASUT_COMPANY_ID', ''),
+
 ];
