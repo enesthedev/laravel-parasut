@@ -3,6 +3,7 @@
 namespace Enes\Parasut;
 
 use Enes\Parasut\Exceptions\AuthorizationException;
+use Enes\Parasut\Exceptions\ParasutHTTPException;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Response;
 use Psr\SimpleCache\InvalidArgumentException;
@@ -42,6 +43,25 @@ class ParasutContacts
 
     /**
      * @throws AuthorizationException
+     * @throws ConnectionException
+     * @throws ParasutHTTPException
+     * @throws InvalidArgumentException
+     */
+    public function isTaxNumberRegistered(string $taxNumber): ?string
+    {
+        $response = $this->index(parameters: ['filter[tax_number]' => $taxNumber]);
+
+        if (! $response->ok()) {
+            throw new ParasutHTTPException('Unable to retrieve contact details.');
+        }
+
+        $data = $response->json()['data'];
+
+        return count($data) > 0 ? $data[0] : null;
+    }
+
+    /**
+     * @throws AuthorizationException
      * @throws InvalidArgumentException
      * @throws ConnectionException
      */
@@ -52,6 +72,6 @@ class ParasutContacts
         return $this->client->http->post(
             "{$this->apiVersion}/{$this->companyId}/contacts",
             $data,
-        );
+        )->json();
     }
 }

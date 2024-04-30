@@ -40,8 +40,8 @@ class ParasutClient
                 AuthorizationType::PASSWORD => $this->authorizeWithPassword(),
             };
 
-            $token = json_decode($response);
-            $this->cache()->put(self::CACHE_KEY, $response, now()->addSeconds($token->expires_in));
+            $token = $response->json();
+            $this->cache()->put(self::CACHE_KEY, $response->body(), now()->addSeconds($token->expires_in));
         }
 
         $this->http->setAuthorization($token);
@@ -53,7 +53,7 @@ class ParasutClient
      * @throws AuthorizationException
      * @throws ConnectionException
      */
-    private function authorizeWithPassword(): string
+    private function authorizeWithPassword(): \Illuminate\Http\Client\Response
     {
         $this->validateClientId();
         $this->validateClientSecret();
@@ -76,7 +76,7 @@ class ParasutClient
             throw new AuthorizationException('Authorization failed with status code: '.$response->status());
         }
 
-        return $response->body();
+        return $response;
     }
 
     /**
