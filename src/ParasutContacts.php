@@ -6,7 +6,6 @@ use Enes\Parasut\Exceptions\AuthorizationException;
 use Enes\Parasut\Exceptions\ParasutHTTPException;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Response;
-use Illuminate\Support\Arr;
 use Psr\SimpleCache\InvalidArgumentException;
 
 class ParasutContacts
@@ -52,7 +51,7 @@ class ParasutContacts
     {
         $response = $this->index(parameters: ['filter[tax_number]' => $taxNumber]);
 
-        if (!$response->ok()) {
+        if (! $response->ok()) {
             throw new ParasutHTTPException('Unable to retrieve contact details.');
         }
 
