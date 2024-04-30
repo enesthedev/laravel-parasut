@@ -74,8 +74,8 @@ class ParasutClient
             ]
         );
 
-        if (!$response->ok()) {
-            throw new AuthorizationException('Authorization failed with status code: ' . $response->status());
+        if (! $response->ok()) {
+            throw new AuthorizationException('Authorization failed with status code: '.$response->status());
         }
 
         return $response;
