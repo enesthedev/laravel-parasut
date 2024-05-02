@@ -63,7 +63,7 @@ class ParasutHttpClient
 
     protected function getUrl(string $uri): string
     {
-        return rtrim($this->baseUrl, '/') . '/' . ltrim($uri, '/');
+        return rtrim($this->baseUrl, '/').'/'.ltrim($uri, '/');
     }
 
     protected function getDefaultHeaders(): array
@@ -71,7 +71,7 @@ class ParasutHttpClient
         $headers = [];
 
         if ($this->authorization) {
-            $headers['Authorization'] = 'Bearer ' . $this->authorization->access_token;
+            $headers['Authorization'] = 'Bearer '.$this->authorization->access_token;
         }
 
         return $headers;
