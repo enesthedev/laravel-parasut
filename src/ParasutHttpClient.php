@@ -17,39 +17,43 @@ class ParasutHttpClient
     }
 
     /**
-     * @throws ConnectionException
+     * @throws ConnectionException|\Illuminate\Http\Client\RequestException
      */
     public function get(string $uri, array $params = []): \Illuminate\Http\Client\Response
     {
         return Http::withHeaders($this->getDefaultHeaders())
-            ->get($this->getUrl($uri), http_build_query($params));
+            ->get($this->getUrl($uri), http_build_query($params))
+            ->throw();
     }
 
     /**
-     * @throws ConnectionException
+     * @throws ConnectionException|\Illuminate\Http\Client\RequestException
      */
     public function post(string $uri, array $data = []): \Illuminate\Http\Client\Response
     {
         return Http::withHeaders($this->getDefaultHeaders())
-            ->post($this->getUrl($uri), $data);
+            ->post($this->getUrl($uri), $data)
+            ->throw();
     }
 
     /**
-     * @throws ConnectionException
+     * @throws ConnectionException|\Illuminate\Http\Client\RequestException
      */
     public function put(string $uri, array $data = []): \Illuminate\Http\Client\Response
     {
         return Http::withHeaders($this->getDefaultHeaders())
-            ->put($this->getUrl($uri), $data);
+            ->put($this->getUrl($uri), $data)
+            ->throw();
     }
 
     /**
-     * @throws ConnectionException
+     * @throws ConnectionException|\Illuminate\Http\Client\RequestException
      */
     public function delete(string $uri, array $data = []): \Illuminate\Http\Client\Response
     {
         return Http::withHeaders($this->getDefaultHeaders())
-            ->delete($this->getUrl($uri), $data);
+            ->delete($this->getUrl($uri), $data)
+            ->throw();
     }
 
     public function setAuthorization($authorization): void
@@ -59,7 +63,7 @@ class ParasutHttpClient
 
     protected function getUrl(string $uri): string
     {
-        return rtrim($this->baseUrl, '/').'/'.ltrim($uri, '/');
+        return rtrim($this->baseUrl, '/') . '/' . ltrim($uri, '/');
     }
 
     protected function getDefaultHeaders(): array
@@ -67,7 +71,7 @@ class ParasutHttpClient
         $headers = [];
 
         if ($this->authorization) {
-            $headers['Authorization'] = 'Bearer '.$this->authorization->access_token;
+            $headers['Authorization'] = 'Bearer ' . $this->authorization->access_token;
         }
 
         return $headers;
